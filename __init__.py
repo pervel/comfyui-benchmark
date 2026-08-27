@@ -44,10 +44,10 @@ INITIAL_PSUTIL_QUERY = None
 psutil_query = ["timestamp", "used", "total"]
 
 nvidia_smi_query = ["timestamp", "memory.used", "memory.total", "utilization.gpu", "utilization.memory", "power.draw", "power.draw.instant", "power.limit", "pcie.link.gen.current", "pcie.link.gen.max", "pcie.link.width.current"]
-_nvidia_smi_query_list = ["nvidia-smi", "--query-gpu=" + ",".join(nvidia_smi_query), "--format=csv,noheader,nounits", smi_id]
+_nvidia_smi_query_list = ["nvidia-smi", "--query-gpu=" + ",".join(nvidia_smi_query), "--format=csv,noheader,nounits"] + ([smi_id] if smi_id else [])
 
 info_nvidia_smi_query = ["name", "count", "driver_version", "display_active", "vbios_version", "power.management"]
-_info_nvidia_smi_query_list = ["nvidia-smi", "--query-gpu=" + ",".join(info_nvidia_smi_query), "--format=csv,noheader,nounits", smi_id]
+_info_nvidia_smi_query_list = ["nvidia-smi", "--query-gpu=" + ",".join(info_nvidia_smi_query), "--format=csv,noheader,nounits"] + ([smi_id] if smi_id else [])
 
 # For NVIDIA devices, during the benchmark setup a process to call nvidia-smi regularly (or with varying intervals)
 def nvidia_smi_thread(out_queue: Queue, in_queue: Queue, check_interval: float):
